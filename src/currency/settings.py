@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_extensions',
+    'debug_toolbar',
 
     'rate',
 ]
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'currency.urls'
@@ -60,7 +62,9 @@ ROOT_URLCONF = 'currency.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,6 +128,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # CELERY
 CELERY_BROKER_URL = 'amqp://localhost'
@@ -133,3 +140,10 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='*/1'),
     },
 }
+
+# debug tool_bar
+DEBUG_TOOLBAR_PATCH_SETTINGS = True
+INTERNAL_IPS = [
+    '127.0.0.1',
+    '172.23.80.1',
+]
