@@ -3,6 +3,9 @@
 {% block content %}
         <div class="row">
             <div class="col">
+                <div>{{ object_list.count }}</div>
+                <div>{{ object_count }}</div>
+                <div><a href="{% url 'rate:list-csv' %}">Download CSV</a></div>
                 {% for rate in rate_list %}
                     <p>
                     COUNTER: {{ forloop.counter }}

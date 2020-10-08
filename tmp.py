@@ -3,3 +3,4 @@ n = 4
 
 res = [group[i:i + n] for i in range(0, len(group), n)]
 print(res)
+

@@ -5,6 +5,7 @@ app_name = 'rate'
 
 urlpatterns = [
     path('list/', views.RateListView.as_view(), name='list'),
+    path('list/csv/', views.CSVView.as_view(), name='list-csv'),
 
     path('contact-us/create/', views.CreateContactUsView.as_view(), name='contact-us-create'),
 ]
