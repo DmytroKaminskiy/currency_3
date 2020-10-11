@@ -6,6 +6,12 @@ CURRENCY_CHOICES = (
     (CURRENCY_EUR, 'Euro'),
 )
 
+SOURCE_PRIVATBANK = 1
+SOURCE_MONOBANK = 2
+SOURCE_AVALBANK = 3
+
 SOURCE_CHOICES = (
-    (1, 'PrivatBank'),
+    (SOURCE_PRIVATBANK, 'PrivatBank'),
+    (SOURCE_MONOBANK, 'MonoBank'),
+    (SOURCE_AVALBANK, 'AvalBank'),
 )

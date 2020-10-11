@@ -1,10 +1,13 @@
 import csv
 from django.http import HttpResponse
+from django.shortcuts import render
 
 from django.views.generic import ListView, CreateView
 from rate.models import Rate, ContactUs
 from django.urls import reverse_lazy
 from django.views.generic import View
+from rate import choices
+from rate.selectors import get_latest_rates
 
 from rate.utils import display
 
@@ -32,7 +35,6 @@ class CreateContactUsView(CreateView):
         return super().form_valid(form)
 
 
-
 class CSVView(View):
     headers = [
         'sale', 'buy',
@@ -54,3 +56,9 @@ class CSVView(View):
             )
 
         return response
+
+
+class LatestRates(View):
+    def get(self, request):
+        context = {'rate_list': get_latest_rates()}
+        return render(request, 'rate/latest-rates.html', context=context)
