@@ -90,12 +90,32 @@
 # print(d1.get_discount())
 
 
-class Price:
-    def __init__(self, amount):
-        self.__amount = amount
+# class Price:
+#     def __init__(self, amount):
+#         self.__amount = amount
+#
+# class Discount:
+#     def __init__(self, amount):
+#         self.__amount = Price(amount)
+#
+# d1 = Discount(20)
 
-class Discount:
-    def __init__(self, amount):
-        self.__amount = Price(amount)
 
-d1 = Discount(20)
+value = 'Dima'
+SECRET_KEY = 3
+print(value)
+
+def get_session_key(val):
+    return ''.join(chr(ord(char) + SECRET_KEY) for char in val)
+
+def decode_session_key(val):
+    return ''.join(chr(ord(char) - SECRET_KEY) for char in val)
+
+session_key = get_session_key(value)
+print(session_key)
+original_value = decode_session_key(session_key)
+print(original_value)
+
+
+
+

@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tl!!zt8=1@ue_qo1890ods-#8bd-!eafzl8+xvn%+y^zjkpqnt'
+SECRET_KEY = 'tl!!zt8=1@ue_qo1890ods-#8bd-!eafzl8+xvn%+y^zjkpqntawdawdw4r4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'debug_toolbar',
 
+    'account',
     'rate',
 ]
 
@@ -130,6 +131,7 @@ USE_L10N = False
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'account.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
