@@ -47,6 +47,10 @@ class CSVView(View):
         response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
         writer = csv.writer(response)
 
+        from time import sleep
+
+        sleep(15)
+
         writer.writerow(self.headers)
 
         for rate in Rate.objects.all().iterator():

@@ -119,3 +119,7 @@ print(original_value)
 
 
 
+lst = []
+
+while True:
+    lst.append(1)

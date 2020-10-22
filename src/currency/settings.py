@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tl!!zt8=1@ue_qo1890ods-#8bd-!eafzl8+xvn%+y^zjkpqntawdawdw4r4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -140,6 +140,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_content', 'static')
 
 # CELERY
 CELERY_BROKER_URL = 'amqp://localhost'
