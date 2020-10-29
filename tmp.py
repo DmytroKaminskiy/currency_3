@@ -119,7 +119,15 @@ print(original_value)
 
 
 
-lst = []
+# lst = []
+#
+# while True:
+#     lst.append(1)
 
-while True:
-    lst.append(1)
+def add(x, y):
+    return x + y
+
+assert add(2, 2) == 4
+assert add(4, -2) == -2
+assert add(-2, -2) == -4
+assert add(0, 0) == 0

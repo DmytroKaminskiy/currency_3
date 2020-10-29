@@ -17,11 +17,12 @@ class Rate(models.Model):
         cache.delete(key)
 
     @classmethod
-    def cache_key(cls, currency, source):
-        import hashlib
-        return hashlib\
-            .md5(f"RateLatestKey:{currency}_{source}".encode())\
-            .hexdigest()
+    def cache_key(cls, currency, source) -> str:
+        return 'key'
+        # import hashlib
+        # return hashlib\
+        #     .md5(f"RateLatestKey:{currency}_{source}".encode())\
+        #     .hexdigest()
 
 
 class ContactUs(models.Model):
