@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tl!!zt8=1@ue_qo1890ods-#8bd-!eafzl8+xvn%+y^zjkpqntawdawdw4r4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -157,3 +157,8 @@ INTERNAL_IPS = [
     '127.0.0.1',
     '172.23.80.1',
 ]
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'example@ex.com'
+    DOMAIN = 'http://172.31.241.91:8001'

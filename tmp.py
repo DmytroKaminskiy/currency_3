@@ -131,3 +131,12 @@ assert add(2, 2) == 4
 assert add(4, -2) == -2
 assert add(-2, -2) == -4
 assert add(0, 0) == 0
+
+
+'''
+Create registration form (email, password, password_confirmation, first_name, last_name)
+Submit registration form
+Create user with given fields (is_active=False)
+Send email with Confirmation link
+Update is_active=True
+'''
