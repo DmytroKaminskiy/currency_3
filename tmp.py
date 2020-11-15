@@ -139,4 +139,9 @@ Submit registration form
 Create user with given fields (is_active=False)
 Send email with Confirmation link
 Update is_active=True
+
+
+https://www.thegeekdiary.com/run-docker-as-a-non-root-user/
 '''
+
+print('from container')
