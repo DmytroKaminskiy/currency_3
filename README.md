@@ -1,10 +1,9 @@
-# currency_3
+### start project
+`$ make build`
 
-1. Подключить бутстрап и создать базовый шаблон
-2. Добавить футтер
-3. Показать все рейты в бутстрап таблице (показать все поля)
-4. Создать Модель фидбэк и форму добавления
-   rating = [1, 10]
-   message = Text
+1. run celerybeat container (edit run.sh)
+2. run redis instead of memcached ()
+3. https://www.portainer.io/ (run with docker-compose)
+4. Run pgadmin (docker-compose https://www.pgadmin.org/) https://hub.docker.com/r/dpage/pgadmin4/
 
-* добавить имейл сообщение с помощью селери (на создания контакт АС и Фидбэк)
+** 5. Run https://flower.readthedocs.io/en/latest/screenshots.html (celery,celerybeat)

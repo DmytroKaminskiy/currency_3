@@ -30,6 +30,9 @@ class SignUpView(CreateView):
     form_class = UserRegistrationForm
     success_url = reverse_lazy('index')
 
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
     # def form_valid(self, form):
     #     send_sign_up_email.delay(form.instance)
     #     return super().form_valid(form)
