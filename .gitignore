@@ -1,5 +1,5 @@
 .env
 __pycache__/
-.idea/
+#.idea/
 static_content/
 **/settings_local.py
