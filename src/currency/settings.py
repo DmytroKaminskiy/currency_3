@@ -141,6 +141,9 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join('/tmp', 'static_content', 'static')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_content')
+
 # CELERY
 CELERY_BROKER_URL = 'amqp://{0}:{1}@rabbitmq:5672//'.format(
     os.environ.get('RABBITMQ_DEFAULT_USER', 'guest'),
