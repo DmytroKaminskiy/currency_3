@@ -147,6 +147,7 @@ https://www.thegeekdiary.com/run-docker-as-a-non-root-user/
 print('from container')
 
 
+
 docker exec -it backend python ./src/manage.py collectstatic --noinput
 docker cp backend:/tmp/static_content/static /tmp/static
 docker cp /tmp/static nginx:/etc/nginx/static

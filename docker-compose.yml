@@ -1,84 +1,68 @@
 version: "3.8"
 
+x-defaults: &x-defaults
+  tty: true
+  stdin_open: true
+  restart: always
+  env_file: .env
+
+x-backend-defaults: &x-backend-defaults
+  depends_on:
+    - memcached
+    - rabbitmq
+    - postgres
+  volumes:
+    - ./:/srv/project
+
 services:
 
   backend:
     build: .
     container_name: backend
-    tty: true
-    stdin_open: true
-    restart: always
-    env_file: .env
-    depends_on:
-      - memcached
-      - rabbitmq
     ports:
       - "8000:8000"
       - "9000:9000"
-    volumes:
-      - ./:/srv/project
+    <<: *x-defaults
+    <<: *x-backend-defaults
 
   celery:
     build: .
     container_name: celery
-    tty: true
-    stdin_open: true
-    restart: always
-    env_file: .env
     environment:
       - MODE=celery
-    depends_on:
-      - memcached
-      - rabbitmq
-    volumes:
-      - ./:/srv/project
+    <<: *x-defaults
+    <<: *x-backend-defaults
 
   celerybeat:
     build: .
     container_name: celerybeat
-    tty: true
-    stdin_open: true
-    restart: always
-    env_file: .env
     environment:
       - MODE=celerybeat
-    depends_on:
-      - memcached
-      - rabbitmq
-    volumes:
-      - ./:/srv/project
+    <<: *x-defaults
+    <<: *x-backend-defaults
 
   memcached:
     image: memcached:1.6.8
     container_name: memcached
-    tty: true
-    stdin_open: true
-    restart: always
 
   rabbitmq:
     image: rabbitmq:3.8-rc-management
     container_name: rabbitmq
-    tty: true
-    stdin_open: true
-    restart: always
     ports:
       - "15672:15672"
-    env_file: .env
+    <<: *x-defaults
 
   postgres:
     image: postgres:12.3-alpine
     container_name: postgres
-    env_file: .env
-    restart: always
     volumes:
       - db_data:/var/lib/postgresql/data
+    <<: *x-defaults
 
   nginx:
     image: nginx:latest
-#    command: /bin/sh /etc/nginx/start_nginx.sh
+    #    command: /bin/sh /etc/nginx/start_nginx.sh
     container_name: nginx
-    restart: always
-    env_file: .env
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf:ro
       - ./proxy_params:/etc/nginx/proxy_params:ro
@@ -87,6 +71,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    <<: *x-defaults
 
 volumes:
-  db_data: {}
+  db_data: { }

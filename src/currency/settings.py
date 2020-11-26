@@ -17,13 +17,11 @@ from celery.schedules import crontab
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = os.environ['SERVER'] == 'dev'
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -37,6 +35,8 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'debug_toolbar',
+    'rest_framework',
+    'drf_yasg',
 
     'account',
     'rate',
@@ -75,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'currency.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -97,7 +96,6 @@ CACHES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -115,7 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -171,6 +168,7 @@ if DEBUG:
 
     # debug tool_bar
     import socket
+
     DEBUG_TOOLBAR_PATCH_SETTINGS = True
     INTERNAL_IPS = ['127.0.0.1']
 
@@ -184,3 +182,14 @@ if DEBUG:
 #     from currency.settings_local import *
 # except ImportError:
 #     print('Local Settings Import Error\n' * 5)
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+}
