@@ -9,7 +9,8 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     email = models.EmailField(
-        'email address', blank=False, null=False, unique=True)
+        'email address', blank=False, null=False, unique=True,
+    )
 
     @property
     def active_avatar(self) -> str:

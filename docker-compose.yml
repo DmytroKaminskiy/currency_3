@@ -42,11 +42,11 @@ services:
     <<: *x-backend-defaults
 
   memcached:
-    image: memcached:1.6.8
+    image: memcached:1.6.8-alpine
     container_name: memcached
 
   rabbitmq:
-    image: rabbitmq:3.8-rc-management
+    image: rabbitmq:3.8-rc-management-alpine
     container_name: rabbitmq
     ports:
       - "15672:15672"
@@ -72,6 +72,15 @@ services:
       - "80:80"
       - "443:443"
     <<: *x-defaults
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    <<: *x-defaults
+    ports:
+      - "${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT}"
+    depends_on:
+      - postgres
 
 volumes:
   db_data: { }

@@ -8,12 +8,18 @@ from django.urls import reverse_lazy
 from django.views.generic import View
 from rate import choices
 from rate.selectors import get_latest_rates
+from rate.filters import RateFilter
 
 from rate.utils import display
 
+from django_filters.views import FilterView
 
-class RateListView(ListView):
+
+class RateListView(FilterView):
     queryset = Rate.objects.all()
+    paginate_by = 10
+    filterset_class = RateFilter
+    template_name = 'rate/rate_list.html'
 
     # def get_queryset(self):
     #     queryset = super().get_queryset()
@@ -21,6 +27,11 @@ class RateListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        context['GET_PARAMS'] = '&'.join(
+            f'{key}={value}'
+            for key, value in self.request.GET.items()
+            if key != 'page'
+        )
         context['object_count'] = context['object_list'].count()
         return context
 

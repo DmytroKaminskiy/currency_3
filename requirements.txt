@@ -18,3 +18,4 @@ djangorestframework
 drf-yasg
 djangorestframework-simplejwt
 faker
+django-filter
