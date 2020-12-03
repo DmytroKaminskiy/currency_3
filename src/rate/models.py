@@ -16,6 +16,14 @@ class Rate(models.Model):
             ('currency', 'source'),
         )
 
+        permissions = [
+            ("full_edit", "This permission allows user to update all available fields in Rate model"),
+        ]
+
+    # def __str__(self):
+    # TODO FK
+    #     return f'{self.id}'
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         key = self.__class__.cache_key(self.currency, self.source)

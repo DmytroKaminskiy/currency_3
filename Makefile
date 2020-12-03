@@ -9,6 +9,9 @@ makemigrations:
 migrate:
 	docker exec -it backend python ./src/manage.py migrate
 
+shell:
+	docker exec -it backend python ./src/manage.py shell_plus --print-sql
+
 collectstatic:
 	docker exec -it backend python ./src/manage.py collectstatic --noinput && \
 	docker cp backend:/tmp/static_content/static /tmp/static && \

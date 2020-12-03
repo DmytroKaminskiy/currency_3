@@ -32,7 +32,11 @@ def user_avatar_upload(instance, filename):
 class Avatar(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     file_path = models.FileField(upload_to=user_avatar_upload)
-    is_active = bool
+    is_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'Id: {self.id}, is_active: ' \
+               f'{self.is_active}, user: {self.user_id}'
 
     # def save(self):
     # self.id - in db
