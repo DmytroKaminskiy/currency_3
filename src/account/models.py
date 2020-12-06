@@ -12,12 +12,15 @@ class User(AbstractUser):
         'email address', blank=False, null=False, unique=True,
     )
 
-    @property
-    def active_avatar(self) -> str:
-        """
-        TODO
-        :return: user active avatar url if exists
-        """
+    # @property
+    # def active_avatar(self) -> str:
+    #     """
+    #     :return: user active avatar url if exists
+    #     """
+    #     avatar = self.avatar_set.filter(is_active=True).last()
+    #     if avatar:
+    #         return avatar.file_path.url
+    #     return ''
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -38,6 +41,19 @@ class Avatar(models.Model):
         return f'Id: {self.id}, is_active: ' \
                f'{self.is_active}, user: {self.user_id}'
 
+    def save(self, *args, **kwargs):
+
+        if not self.is_active and \
+            not self.__class__.objects.filter(user_id=self.user_id).exists():
+            self.is_active = True
+
+        if self.is_active:
+            self.__class__.objects\
+                .filter(user_id=self.user_id)\
+                .update(is_active=False)
+
+        super().save(*args, **kwargs)
+
     # def save(self):
     # self.id - in db
     # not self.id - not in db
@@ -45,4 +61,4 @@ class Avatar(models.Model):
 
     def delete(self, using=None, keep_parents=False):
         # TODO remove file from system
-        super().delete(using=None, keep_parents=False)
+        super().delete(using=using, keep_parents=keep_parents)

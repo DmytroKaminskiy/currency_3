@@ -7,7 +7,7 @@
             <div>{{ object_count }}</div>
             <div><a href="{% url 'rate:list-csv' %}">Download CSV</a></div>
 
-{#     TODO move to parts/filters.html       #}
+            {#     TODO move to parts/filters.html       #}
             <form method="get">
                 {{ filter.form.as_p }}
                 <button type="submit" class="btn btn-primary">
@@ -22,6 +22,7 @@
                     <th>Sale</th>
                     <th>Source</th>
                     <th>Currency</th>
+                    <th>Created</th>
                 </tr>
                 {% for rate in rate_list %}
                     <tr>
@@ -30,31 +31,12 @@
                         <td>{{ rate.sale }}</td>
                         <td>{{ rate.get_source_display }}</td>
                         <td>{{ rate.get_currency_display }}</td>
+                        <td>{{ rate.created.date }}</td>
                     </tr>
                 {% endfor %}
             </table>
-            <div class="pagination">
 
-{# TODO move to parts/pagination.html #}
-{#       use include 'parts/pagination.html'     #}
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1&{{ GET_PARAMS }}">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}&{{ GET_PARAMS }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}&{{ GET_PARAMS }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}&{{ GET_PARAMS }}">last &raquo;</a>
-        {% endif %}
-    </span>
-
-
-            </div>
+            {% include 'parts/pagination.html' %}
         </div>
     </div>
 {% endblock content %}
