@@ -76,4 +76,5 @@ class CSVView(View):
 class LatestRates(View):
     def get(self, request):
         context = {'rate_list': get_latest_rates()}
+        print(context)
         return render(request, 'rate/latest-rates.html', context=context)

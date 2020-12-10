@@ -21,9 +21,6 @@ def get_latest_rates():
                         .filter(source=source_int, currency=currency_int) \
                         .order_by('created') \
                         .last()
-                    # # slow
-                    if rate:
-                        cache.set(key, rate, 120)
 
                 # if rate is not None:
                 if rate:

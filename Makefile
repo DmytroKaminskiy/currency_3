@@ -1,16 +1,21 @@
 SHELL := /bin/bash
 
+manage_py := docker exec -it backend python ./src/manage.py
+
 runserver:
-	docker exec -it backend python ./src/manage.py runserver 0:9000
+	$(manage_py) runserver 0:9000
 
 makemigrations:
-	docker exec -it backend python ./src/manage.py makemigrations
+	$(manage_py) makemigrations
+
+generate_data:
+	$(manage_py) generate_data
 
 migrate:
-	docker exec -it backend python ./src/manage.py migrate
+	$(manage_py) migrate
 
 shell:
-	docker exec -it backend python ./src/manage.py shell_plus --print-sql
+	$(manage_py) shell_plus --print-sql
 
 collectstatic:
 	docker exec -it backend python ./src/manage.py collectstatic --noinput && \

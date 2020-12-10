@@ -124,13 +124,13 @@ print(original_value)
 # while True:
 #     lst.append(1)
 
-def add(x, y):
-    return x + y
-
-assert add(2, 2) == 4
-assert add(4, -2) == -2
-assert add(-2, -2) == -4
-assert add(0, 0) == 0
+# def add(x, y):
+#     return x + y
+#
+# assert add(2, 2) == 4
+# assert add(4, -2) == -2
+# assert add(-2, -2) == -4
+# assert add(0, 0) == 0
 
 
 '''
@@ -157,3 +157,21 @@ docker system prune -a
 docker system df
 docker system df -vv
 '''
+
+def log(*args):
+    print(args)
+
+
+def log2(*args):
+    print(args)
+
+def add(a, b, callback=None):
+    res = a + b
+
+    if callback is not None:
+        callback(a, b)
+
+    return res
+
+# result = add(1, 2, log2)
+add(1, 2, lambda *args: print(args))

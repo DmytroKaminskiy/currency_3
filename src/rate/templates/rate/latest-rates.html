@@ -1,17 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <div class="row">
-            <div class="col">
-                {% for rate in rate_list %}
-                    <p>
+    <div class="row">
+        <button id="update-rates-js">Update</button>
+        <div class="col latest-rates-row-js">
+            {% for rate in rate_list %}
+                <p>
                     COUNTER: {{ forloop.counter }}
                     ID: {{ rate.id }}
                     Buy: {{ rate.buy }}
                     Currency: {{ rate.get_currency_display }}
                     Source: {{ rate.get_source_display }}
-                    </p>
-                {% endfor %}
-            </div>
+                </p>
+            {% endfor %}
         </div>
+    </div>
 {% endblock content %}
+
+{% block extra_js %}
+    <script>
+        $(document).ready(function () {
+            $("#update-rates-js").click(function () {
+                $.get('/api/v1/rates/latest/').done(
+                    function (data, status) {
+
+                        let ratesSelector = $('.latest-rates-row-js');
+
+                        ratesSelector.empty();
+
+                        var i;
+                        for (i = 0; i < data.length; i++) {
+                            ratesSelector.append(
+                                `<p>ID: ${data[i].id} Buy: ${data[i].buy} Sale: ${data[i].sale}</p>`
+                            );
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+{% endblock extra_js %}
