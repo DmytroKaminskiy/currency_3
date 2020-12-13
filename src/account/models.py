@@ -62,3 +62,11 @@ class Avatar(models.Model):
     def delete(self, using=None, keep_parents=False):
         # TODO remove file from system
         super().delete(using=using, keep_parents=keep_parents)
+
+
+class URLTracker(models.Model):
+    path = models.CharField(max_length=256, unique=True)
+    counter = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f'ID: {self.id} path: {self.path} counter: {self.counter}'

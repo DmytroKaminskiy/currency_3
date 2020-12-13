@@ -19,3 +19,4 @@ drf-yasg
 djangorestframework-simplejwt
 faker
 django-filter
+django-annoying
